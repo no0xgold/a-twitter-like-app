@@ -1,4 +1,4 @@
-from django.http import HttpResponse,Http404,JsonResponse
+from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render
 from .models import Tweet
 
@@ -6,6 +6,24 @@ def home_view(request,*args,**kwargs):
     print(args,kwargs)
     #return HttpResponse("<h1>Hello<h1>")
     return render(request,"pages/home.html", context={},status=200)
+
+def tweet_list_view(request,*args,**kwargs):
+    """
+    REST API VIEW
+    Consme by JavaScript or Swift/Java/ios/Android
+    return json data
+    for now we use JS
+    """
+    qs=Tweet.objects.all()
+    tweets_list=[{"id":x.id, "content": x.content} for x in qs]
+    data={
+        "IsUser": False,
+        "response": tweets_list
+        }
+    return JsonResponse(data)
+
+
+
 def tweet_detail_view(request,tweet_id,*args,**kwargs):
     """
     REST API VIEW

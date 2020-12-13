@@ -1,1 +1,33 @@
-<h1>Hello world</h1>
+{% extends 'tweets\base.html' %}
+{% block head_title %}
+what a nice concept!
+{% endblock head_title %}
+
+{% block content %}
+Welcom to Tweet
+<div id='tweets'>
+    Replace me
+</div>
+<script>
+const tweetsElement = document.getElementById("tweets") // get an html element  
+tweetsElement.innerHTML = 'loading...' // set new html  in that elemnt
+var el1 = "<h1>Hi there1</h1>"
+var el2 = "<h1>Hi there2</h1>"
+var el3 = "<h1>Hi there3</h1>"
+tweetsElement.innerHTML = el1 + el2 + el3
+const xhr = new XMLHttpRequest()
+const method = 'GET'//post method
+const url = "/tweets"
+const responseType = "json"
+
+
+xhr.responseType = responseType
+xhr.open(method, url)
+xhr.onload = function(){
+    const serverResponse = xhr.response
+    var listedItems = serverResponse.response
+    console.log(listedItems)
+}
+xhr.send()
+</script>
+    {% endblock content %}
