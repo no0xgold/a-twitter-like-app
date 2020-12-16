@@ -18,6 +18,7 @@ how about tweets
         -image
     -delete
     -retweeting
+    -like
 
 following/followers
 

@@ -7,13 +7,19 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
+    <style>
+      .bg-tweet {
+          background-color: #dc3545!important;
+      }
+    </style>
     <title>Tweet {% block head_title %}{% endblock head_title %} </title>
   </head>
   <body>
-   {% block content %}
-   {% endblock content %}
-
+    {% include "components/navbar.html" %}
+    <div class='container'>
+      {% block content %}
+      {% endblock content %}
+  </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
