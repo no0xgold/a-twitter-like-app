@@ -78,8 +78,10 @@ function handleTweetCreateFormDidSumbit(event) {
             }
         }else if (xhr.status === 500) {
             alert("there was a server error")
+        }else if (xhr.status === 401) {
+            alert("you're not login!")
+            window.location.href = "/login"
         }
-        
     }
     xhr.onerror = function(){
         alert("An error ocurred")

@@ -26,7 +26,7 @@ SECRET_KEY = 'lhjihtgpswad8i4gxk0sy5$8v&p68!+$&(0oh_1xe*r48uzvhy'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
-
+MAX_TWEET_LENGTH=387
 
 # Application definition
 
@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #third-party
+    'rest_framework',
+    #internal
     'tweets',
+    
 ]
 
 MIDDLEWARE = [
@@ -99,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+LOGIN_URL = "/login"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

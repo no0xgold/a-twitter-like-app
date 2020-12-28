@@ -13,9 +13,10 @@ what do we need for user?
         =user +who they fallow
 
 how about tweets
-    -creating
-        -text
-        -image
+    -user permision
+        -creating
+            -text
+            -image
     -delete
     -retweeting
     -like

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
-
+from .serializers import TweetSerializer
 from .models import Tweet
 from .forms import TweetForms
 
@@ -11,16 +11,32 @@ from .forms import TweetForms
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 def home_view(request,*args,**kwargs):
-    print(args,kwargs)
+    print(request.user or None)
     #return HttpResponse("<h1>Hello<h1>")
     return render(request,"pages/home.html", context={},status=200)
 
+
 def tweet_create_view(request, *args, **kwargs):
+    serializer = TweetSerializer(data=request.POST or None)
+    if serializer.is_valid():
+        obj = serializer.save(user=request.user)
+        return JsonResponse(serializer.data, status=201)
+    return JsonResponse({}, status=400)
+
+
+def tweet_create_view_pure_django(request, *args, **kwargs):
+    user = request.user
+    if not request.user.is_authenticated:
+        user = None
+        if request.is_ajax():
+            return JsonResponse({}, status=401)
+        return redirect(settings.LOGIN_URL)
     form = TweetForms(request.POST or None)
     next_url = request.POST.get("next") or None
     if form.is_valid():
         obj = form.save(commit=False)
         # do other form related logic
+        obj.user = user
         obj.save()
         if request.is_ajax():
             return JsonResponse(obj.serialize(), status=201) # 201 == created items

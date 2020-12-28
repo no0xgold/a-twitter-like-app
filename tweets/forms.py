@@ -2,13 +2,13 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 
-
+from django.conf import settings
 
 
 
 from .models import Tweet
 
-MAX_TWEET_LENGTH=387
+MAX_TWEET_LENGTH = settings.MAX_TWEET_LENGTH 
 class TweetForms(forms.ModelForm):
  
     class Meta:
