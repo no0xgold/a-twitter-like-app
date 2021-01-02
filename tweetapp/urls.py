@@ -19,6 +19,7 @@ from django.conf.urls import include
 from tweets.views import (
     home_view,tweet_detail_view,
     tweet_list_view,
+    tweet_action_view,
     tweet_delete_view,
     tweet_create_view,
     )
@@ -29,5 +30,6 @@ urlpatterns = [
     path("tweets", tweet_list_view),
     path("tweets/<int:tweet_id>", tweet_detail_view),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/tweets/action', tweet_action_view),
     path("api/tweets/<int:tweet_id>/delete", tweet_delete_view),
 ]
